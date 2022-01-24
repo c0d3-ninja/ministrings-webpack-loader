@@ -3,13 +3,13 @@ const parser =require("@babel/parser")
 const generate = require("@babel/generator").default
 /* variable to replace values */
 let counter=1
-module.exports= function (source,map){
-    function generateRandomId(value) { // Public Domain/MIT
-        if(value.length<=(''+counter+1).length){
-            return  value
-        }
-        return  ""+(counter++)
+function generateRandomId(value) { // Public Domain/MIT
+    if(value.length<=(''+counter+1).length){
+        return  value
     }
+    return  ""+(counter++)
+}
+module.exports= function (source){
     /* create Abstract Syntax Tree */
     const ast =parser.parse(source,
         {
@@ -48,8 +48,5 @@ module.exports= function (source,map){
             }
         },
     });
-    /* resetting env variable */
-    counter=1
     return generate(ast).code;
-
 }
