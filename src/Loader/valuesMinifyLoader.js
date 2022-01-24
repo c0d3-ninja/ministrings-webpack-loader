@@ -1,13 +1,19 @@
 const traverse =require("@babel/traverse").default
 const parser =require("@babel/parser")
 const generate = require("@babel/generator").default
-/* variable to replace values */
+/* variable to store random small values */
 let counter=1
-function generateRandomId(value) { // Public Domain/MIT
+/* Generating random small ids to reduce file size */
+const generateRandomId = (value)=>{
     if(value.length<=(''+counter+1).length){
         return  value
     }
     return  ""+(counter++)
+}
+const putValueInNode = (valueNode)=>{
+    if(valueNode && valueNode.value && typeof valueNode.value=="string"){
+        valueNode.value=generateRandomId(valueNode.value)
+    }
 }
 module.exports= function (source){
     /* create Abstract Syntax Tree */
@@ -32,9 +38,7 @@ module.exports= function (source){
                 Simply it will replace when the value is string
                 you can extend it if you want other types
                 * */
-                if(initNode && initNode.value && typeof  initNode.value=="string"){
-                    initNode.value=generateRandomId(initNode.value)
-                }
+                putValueInNode(initNode)
             }
             /*
              for Object initialization
@@ -42,9 +46,7 @@ module.exports= function (source){
              */
             if(path.isObjectProperty(path.node)){
                 let valueNode = path.node.value
-                if(valueNode && valueNode.value && typeof valueNode.value=="string"){
-                    valueNode.value=generateRandomId(valueNode.value)
-                }
+                putValueInNode(valueNode)
             }
         },
     });
