@@ -1,15 +1,3 @@
-## NPM Documentation for Minify Constants Webpack Loader
-
-### Package Name: `ministrings-webpack-loader`
-
-### Description
-A Webpack loader that minifies constant string values in JavaScript code. It uses Babel tools to parse source code into an Abstract Syntax Tree (AST), replace string values with shorter identifiers, and then regenerate the optimized code.
-
-### Installation
-```
-npm install minify-constants-loader --save-dev
-```
-
 ### Usage
 In your Webpack configuration, add the loader to your module rules. For example:
 ```javascript
@@ -66,7 +54,7 @@ const MESSAGE = "1";
 - Requires Babel as a peer dependency.
 
 ### Support
-For bugs and feature requests, please open an issue on the [GitHub repository](https://github.com/example/minify-constants-loader).
+For bugs and feature requests, please open an issue on the [GitHub repository](https://github.com/c0d3-ninja/ministrings-webpack-loader).
 
 ### License
 This project is licensed under the MIT License.
